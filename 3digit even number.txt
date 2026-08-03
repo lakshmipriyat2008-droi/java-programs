@@ -1,0 +1,34 @@
+public class Threedigitevennumber {
+    public int[] findEvenNumbers(int[] digits) {
+        int[] count = new int[10];
+
+        // Count frequency of each digit
+        for (int d : digits) {
+            count[d]++;
+        }
+
+        List<Integer> result = new ArrayList<>();
+
+        // Check every 3-digit even number
+        for (int num = 100; num <= 998; num += 2) {
+            int[] temp = count.clone();
+
+            int ones = num % 10;
+            int tens = (num / 10) % 10;
+            int hundreds = num / 100;
+
+            if (temp[hundreds]-- > 0 &&
+                temp[tens]-- > 0 &&
+                temp[ones]-- > 0) {
+                result.add(num);
+            }
+        }
+
+        int[] ans = new int[result.size()];
+        for (int i = 0; i < result.size(); i++) {
+            ans[i] = result.get(i);
+        }
+
+        return ans;
+    }
+}
